@@ -1,11 +1,11 @@
-const NewsCard = () => {
+const NewsCard = ({ title }) => {
     return (
         <div className="news-card">
             <div className="news-img">
                 <img src="#" alt="news_photo" />
             </div>
             <div className="news-title">
-                Charge Two Devices at the Same Time With This Magnetic Wireless Charging Dock
+                {title}
                 <small>
                     3 hours ago
                 </small>
