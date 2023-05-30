@@ -1,0 +1,27 @@
+.header-2 {
+    background: linear-gradient(45deg, #33338c, #55559a);
+    padding: 4rem 0;
+    color: #fff;
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    .container {
+        width: 50%;
+    }
+}
+
+.publisher-details {
+    display: flex;
+    align-items: center;
+
+    .publisher-img {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin-right: 1rem;
+        border-radius: 100%;
+        background: #fff;
+    }
+}
