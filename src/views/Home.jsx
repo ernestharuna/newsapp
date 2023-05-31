@@ -23,10 +23,10 @@ const Home = () => {
             const apiKey = 'b0c4dbc3007c4c728378e2840c0cc0fa';
             const res = await fetch(`https://newsapi.org/v2/top-headlines?country=ng&page=${page}&apiKey=${apiKey}`);
             const data = await res.json();
-            console.log(res);
 
             if (res.ok) {
                 dispatch(fetchNewsSuccess(data.articles));
+                console.log(data);
             } else {
                 throw new Error(data.message);
             }
