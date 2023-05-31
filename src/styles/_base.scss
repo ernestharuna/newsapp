@@ -1,16 +1,22 @@
 /* 
     This style contains styles for all COMPONENTS and other general styles
+    Variables are also defined here as well
 */
 
 $bg-color: #f2f2f2;
 $primary-color: #F36326;
 $pc-hover: #f3510c;
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: $bg-color;
     color: #000;
     margin: 0;
     padding: 0;
+
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -76,7 +82,7 @@ footer {
 
     .news-img {
         height: 150px;
-        background: #acacac;
+        background: linear-gradient(45deg, #9e9e9e, #cccccc);
         border-radius: 2px 2px 0 0;
     }
 
@@ -111,4 +117,9 @@ footer {
             width: 50%;
         }
     }
+}
+
+a {
+    color: $primary-color;
+    font-weight: 900;
 }

@@ -1,4 +1,4 @@
-import '../styles/newsdetail.scss'
+import '../styles/newsdetail.scss';
 
 const NewsDetail = () => {
     return (
