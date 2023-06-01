@@ -13,6 +13,7 @@ dayjs.extend(relativeTime);
 
 const Home = () => {
     const [page, setPage] = useState(1);
+    const [source, setSource] = useState("");
 
     const dispatch = useDispatch();
 
@@ -20,12 +21,23 @@ const Home = () => {
     const loading = useSelector(state => state.news.loading);
     const error = useSelector(state => state.news.error);
 
+    // To control News feed based on user selected sources
+    const apiKey = 'b0c4dbc3007c4c728378e2840c0cc0fa';
+    let url = "https://newsapi.org/v2/top-headlines?"; //initial URL snippet
+
+    // URL option to fetch
+    let defUrl = `${url}country=us&page=${page}&apiKey=${apiKey}&pageSize=10` // Default URL for all news
+    let srcUrl = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apiKey}` // Url when there is Source
+
+    let newUrl;
+
+    source.length > 0 ? (newUrl = srcUrl) : (newUrl = defUrl) // Choose URL based on SOURCE state 
+
     const fetch_news = async (page) => {
         dispatch(fetchNewsStart());
         try {
-            const apiKey = 'b0c4dbc3007c4c728378e2840c0cc0fa';
-            const res = await fetch(`https://newsapi.org/v2/top-headlines?country=us&page=${page}&apiKey=${apiKey}&pageSize=10`);
-            // https://newsapi.org/v2/top-headlines?country=us&page=1&apiKey=b0c4dbc3007c4c728378e2840c0cc0fa
+            const res = await fetch(newUrl);
+            console.log(newUrl);
             const data = await res.json();
 
             if (res.ok) {
@@ -41,19 +53,24 @@ const Home = () => {
 
     useEffect(() => {
         fetch_news(page);
-    }, [page]);
+    }, [page, source]);
 
-    // For pagination control
+    // For pagination control------------------
     const prev_page = () => {
         setPage((prev) => prev - 1);
     };
-
     const next_page = () => {
         setPage((prev) => prev + 1);
     };
-
     const first_page = () => {
         setPage(1);
+    }
+    // --------------------------
+
+
+    const change_source = (event) => {
+        const { value } = event.target;
+        setSource(value);
     }
 
     if (!news.length) {
@@ -98,7 +115,16 @@ const Home = () => {
                     </div>
                 </div>
 
-                <span>— Page {page}</span>
+                <div>
+                    <select value={source} onChange={change_source}>
+                        <option value="">From all sources</option>
+                        <option value="bbc-news">BBC News</option>
+                        <option value="associated-press">Associated Press</option>
+                        <option value="cnn">CNN</option>
+                    </select>
+                    <b>• Page {page}</b>
+                </div>
+
                 <div className="news-section">
                     {loading ? (<p>Loading...</p>) : (
                         <>

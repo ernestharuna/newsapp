@@ -92,7 +92,7 @@ const NewsDetail = () => {
                             {news[newsUrl].content}
                         </>
                     )}
-                    <br />
+                    <br /> <br />
                     <Link to={news[newsUrl].url}>Read more »</Link>
                 </p>
 
