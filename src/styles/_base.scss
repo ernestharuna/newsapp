@@ -3,7 +3,7 @@
     Variables are also defined here as well
 */
 
-$bg-color: #f2f2f2;
+$bg-color: #fff;
 $primary-color: #F36326;
 $pc-hover: #f3510c;
 
@@ -40,7 +40,7 @@ nav {
     justify-content: space-between;
     align-items: center;
 
-    a:first-child {
+    a:nth-child(2) {
         margin-left: 0;
     }
 
@@ -82,8 +82,16 @@ footer {
 
     .news-img {
         height: 150px;
+        width: 100%;
         background: linear-gradient(45deg, #9e9e9e, #cccccc);
         border-radius: 2px 2px 0 0;
+
+        img {
+            // position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
     .news-title {
@@ -122,4 +130,10 @@ footer {
 a {
     color: $primary-color;
     font-weight: 900;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-style: double
+    }
 }

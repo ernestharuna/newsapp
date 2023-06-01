@@ -1,4 +1,3 @@
-import PrimaryBtn from "../components/PrimaryBtn";
 import NewsCard from "../components/NewsCard";
 
 import '../styles/home.scss';
@@ -9,7 +8,6 @@ import { useEffect, useState } from "react";
 
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { Link } from "react-router-dom";
 
 dayjs.extend(relativeTime);
 
@@ -26,8 +24,8 @@ const Home = () => {
         dispatch(fetchNewsStart());
         try {
             const apiKey = 'b0c4dbc3007c4c728378e2840c0cc0fa';
-            const res = await fetch(`https://newsapi.org/v2/top-headlines?country=ng&page=${page}&apiKey=${apiKey}&pageSize=10`);
-            // https://newsapi.org/v2/top-headlines?country=ng&page=1&apiKey=b0c4dbc3007c4c728378e2840c0cc0fa
+            const res = await fetch(`https://newsapi.org/v2/top-headlines?country=us&page=${page}&apiKey=${apiKey}&pageSize=10`);
+            // https://newsapi.org/v2/top-headlines?country=us&page=1&apiKey=b0c4dbc3007c4c728378e2840c0cc0fa
             const data = await res.json();
 
             if (res.ok) {
@@ -43,23 +41,23 @@ const Home = () => {
 
     useEffect(() => {
         fetch_news(page);
-        // console.log(page);
     }, [page]);
 
     // For pagination control
     const prev_page = () => {
         setPage((prev) => prev - 1);
-        // console.log(page);
     };
 
     const next_page = () => {
         setPage((prev) => prev + 1);
-        // console.log(page);
     };
 
     const first_page = () => {
         setPage(1);
-        // console.log(page);
+    }
+
+    if (!news.length) {
+        return (<div className="header-0">Loading</div>)
     }
 
     return (
@@ -68,10 +66,20 @@ const Home = () => {
             <div className="header-0">
                 <div className="container home-title">
                     <span>
-                        {news[0].author} • {dayjs(news[0].publishedAt).fromNow()}
+                        {loading ? (<span>Loading...</span>) : (
+                            <>
+                                {error && <p>{error}</p>}
+                                {news[0].author} • {dayjs(news[0].publishedAt).fromNow()}
+                            </>
+                        )}
                     </span>
                     <h2>
-                        {news[0].title}
+                        {loading ? (<span>Loading...</span>) : (
+                            <>
+                                {error && <p>{error}</p>}
+                                {news[0].title}
+                            </>
+                        )}
                     </h2>
                     <span>
                         <a href="#headlines">See Headlines</a>
@@ -95,8 +103,8 @@ const Home = () => {
                     {loading ? (<p>Loading...</p>) : (
                         <>
                             {error && <p>{error}</p>}
-                            {news.map((article) => (
-                                <NewsCard key={article.url} title={article.title} time={article.publishedAt} author={article.author} />
+                            {news.map((article, index) => (
+                                <NewsCard key={article.url} article={article} id={index} />
                             ))}
                         </>
                     )}

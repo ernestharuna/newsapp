@@ -1,26 +1,24 @@
 
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { Link } from "react-router-dom";
 
 dayjs.extend(relativeTime);
 
-const NewsCard = ({ title, time, author }) => {
-
-    /** 
-     * Cut out author from article
-    */
-    const abbrv = title.split("-")[0];
+const NewsCard = ({ article, id }) => {
 
     return (
         <div className="news-card">
             <div className="news-img">
-                <img src="#" alt="..." />
+                <img src={article.urlToImage ? article.urlToImage : "#"} alt="..." />
             </div>
             <div className="news-title">
                 <small>
-                    {author} • {dayjs(time).fromNow()}
+                    {article.author} • {dayjs(article.publishedAt).fromNow()}
                 </small>
-                {title}
+                <Link to={`/newsheadlines/${id}`}>
+                    {article.title}
+                </Link>
             </div>
         </div>
     )
