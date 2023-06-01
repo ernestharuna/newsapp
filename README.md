@@ -2,7 +2,7 @@
 Open VS Code or IDE of choice (of course), open terminal
 Run the following - 
 - git clone **https://github.com/ernestharuna/newsapp**
-- cd <project-directory>
+- cd project-directory
 - npm install
 - npm run dev
   
