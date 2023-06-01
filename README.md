@@ -6,16 +6,15 @@ Run the following -
 - npm install
 - npm run dev
   
- **If error is thrown on start run these commands to install required dependenc**
+ **If error is thrown on start, run these commands to install required dependencies**
 - npm install dayjs
 - npm install axios
 - npm install react-router-dom
 - npm install sass
 - npm install @reduxjs/toolkit
- 
- And finally :)
-- npm react-redux
-  
+- npm install react-redux
+
+And finally :)
  **If you get a 429 error or page doesn't load.**
 - Replace API KEYS with yours in src/views/Home.jsx; line 25.
  
