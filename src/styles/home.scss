@@ -19,24 +19,6 @@
     }
 }
 
-@media screen and (max-width: 860px) {
-    .header-0 {
-        height: 50dvh;
-    }
-
-    .home-title {
-        margin: 0 0 0;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        color: #fff;
-
-        h2 {
-            font-size: 2rem;
-            margin: 0;
-        }
-    }
-}
-
 .header-1 {
     display: flex;
     align-items: center;
@@ -70,5 +52,23 @@
 
     &:hover {
         background: $pc-hover;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .header-0 {
+        height: 50dvh;
+    }
+
+    .home-title {
+        margin: 0 0 0;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        color: #fff;
+
+        h2 {
+            font-size: 2rem;
+            margin: 0;
+        }
     }
 }

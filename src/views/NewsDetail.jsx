@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import PrimaryBtn from '../components/PrimaryBtn';
 import '../styles/newsdetail.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -49,21 +49,24 @@ const NewsDetail = () => {
 
     return (
         <main>
-            <div className="header-2">
-                <div className="container">
+            <div className="header-2 container">
+                <div>
                     <p>
-                        Innovation • {dayjs(news[0].publishedAt).fromNow()}
+                        {news[newsUrl].source.name} • {dayjs(news[newsUrl].publishedAt).fromNow()}
                     </p>
                     <h2>
                         {news[newsUrl].title}
                     </h2>
 
                     <div className="publisher-details">
-                        <span className="publisher-img">
+                        <div className="publisher-img">
 
-                        </span>
-                        <span className="publisher-name">{news[newsUrl].author}</span>
+                        </div>
+                        <div className="publisher-name">{news[newsUrl].author}</div>
                     </div>
+                </div>
+                <div className='header-2-img'>
+                    <img src={news[newsUrl].urlToImage ? news[newsUrl].urlToImage : "#"} alt="..." />
                 </div>
             </div>
 
@@ -72,12 +75,28 @@ const NewsDetail = () => {
             </div>
             <div className="container">
                 <h3>Description:</h3>
-                {loading ? (<p>Loading...</p>) : (
-                    <>
-                        {error && <p>{error}</p>}
-                        {news[newsUrl].description}
-                    </>
-                )}
+                <p>
+                    {loading ? (<p>Loading...</p>) : (
+                        <>
+                            {error && <p>{error}</p>}
+                            {news[newsUrl].description}
+                        </>
+                    )}
+                </p>
+
+                <h3>Content:</h3>
+                <p>
+                    {loading ? (<p>Loading...</p>) : (
+                        <>
+                            {error && <p>{error}</p>}
+                            {news[newsUrl].content}
+                        </>
+                    )}
+                    <br />
+                    <Link to={news[newsUrl].url}>Read more »</Link>
+                </p>
+
+
             </div>
 
         </main>
