@@ -15,7 +15,9 @@ Run the following -
  
  And finally :)
 - npm react-redux
-
+  
+ **If you get a 429 error or page doesn't load.**
+- Replace API KEYS with yours in src/views/Home.jsx; line 25.
  
   
 ## NB: This isn't build with CRA command, so 'npm start' will not work. Make sure to use NPM RUN DEV.
