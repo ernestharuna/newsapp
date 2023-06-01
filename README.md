@@ -18,6 +18,6 @@ Run the following -
 
  
   
-## NB: This isn't build with CRA command, so npm start will not work. Make sure to use NPM RUN DEV.
+## NB: This isn't build with CRA command, so 'npm start' will not work. Make sure to use NPM RUN DEV.
   
 **_Happy coding and vetting :)_**
