@@ -26,7 +26,7 @@ const Home = () => {
     let url = "https://newsapi.org/v2/top-headlines?"; //initial URL snippet
 
     // URL option to fetch
-    let defUrl = `${url}country=us&page=${page}&apiKey=${apiKey}&pageSize=10` // Default URL for all news
+    let defUrl = `${url}country=us&apiKey=${apiKey}&pageSize=10` // Default URL for all news
     let srcUrl = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apiKey}` // Url when there is Source
 
     let newUrl;
@@ -36,8 +36,8 @@ const Home = () => {
     const fetch_news = async (page) => {
         dispatch(fetchNewsStart());
         try {
-            const res = await fetch(newUrl);
-            console.log(newUrl);
+            const res = await fetch(newUrl + `&page=${page}`);
+            console.log(newUrl + `&page=${page}`);
             const data = await res.json();
 
             if (res.ok) {
@@ -74,7 +74,7 @@ const Home = () => {
     }
 
     if (!news.length) {
-        return (<div className="header-0">Loading</div>)
+        return (<div className="header-0">Loading . . .</div>)
     }
 
     return (
@@ -91,7 +91,7 @@ const Home = () => {
                         )}
                     </span>
                     <h2>
-                        {loading ? (<span>Loading...</span>) : (
+                        {loading ? (<span> . . . </span>) : (
                             <>
                                 {error && <p>{error}</p>}
                                 {news[0].title}
@@ -111,7 +111,11 @@ const Home = () => {
                         Our Top Headlines
                     </h2>
                     <div>
-                        <button onClick={next_page} id="next_page" className="page-btn">Next »</button>
+                        {
+                            newUrl == srcUrl ? (<p>page 1 of 1</p>) : (
+                                <button onClick={next_page} id="next_page" className="page-btn">Next »</button>
+                            )
+                        }
                     </div>
                 </div>
 
@@ -122,7 +126,7 @@ const Home = () => {
                         <option value="associated-press">Associated Press</option>
                         <option value="cnn">CNN</option>
                     </select>
-                    <b>• Page {page}</b>
+                    <b> • Page {page}</b>
                 </div>
 
                 <div className="news-section">
@@ -130,24 +134,29 @@ const Home = () => {
                         <>
                             {error && <p>{error}</p>}
                             {news.map((article, index) => (
-                                <NewsCard key={article.url} article={article} id={index} />
+                                <NewsCard key={article.url} article={article} id={index} url={newUrl} />
                             ))}
                         </>
                     )}
                 </div>
 
-                <div className="pagination">
-                    {
-                        page > 1 ? (
-                            <div>
-                                <button onClick={prev_page} className="page-btn" id="prev_page">« Previous Page</button>
-                                <button onClick={first_page} className="page-btn">⌂ First page</button>
-                            </div>
-                        ) : ("")
-                    }
-                    <button onClick={next_page} className="page-btn" id="next_page">Next Page »</button>
-                </div>
+                {
+                    newUrl == srcUrl ? (<p>page 1 of 1</p>) : (
+                        <div className="pagination">
+                            {
+                                page > 1 ? (
+                                    <div>
+                                        <button onClick={prev_page} className="page-btn" id="prev_page">« Previous Page</button>
+                                        <button onClick={first_page} className="page-btn">⌂ First page</button>
+                                    </div>
+                                ) : ("")
+                            }
+                            <button onClick={next_page} className="page-btn" id="next_page">Next Page »</button>
+                        </div>)
+                }
+
             </div>
+
         </>
     )
 }
