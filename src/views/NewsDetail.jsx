@@ -86,7 +86,7 @@ const NewsDetail = () => {
 
                 <h3>Content:</h3>
                 <p>
-                    {loading ? (<p>Loading...</p>) : (
+                    {loading ? (<span>Loading...</span>) : (
                         <>
                             {error && <p>{error}</p>}
                             {news[newsUrl].content}

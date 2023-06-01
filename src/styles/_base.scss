@@ -119,10 +119,8 @@ footer {
 
         .news-img {
             border-radius: 2px 0 0 2px;
-        }
-
-        .news-img {
-            width: 50%;
+            min-width: 40%;
+            min-height: 100%;
         }
     }
 }
